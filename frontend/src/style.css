@@ -1,0 +1,401 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #080c14;
+  --surface:   #0e1420;
+  --surface2:  #131c2e;
+  --surface3:  #1a2540;
+  --border:    #1e2d47;
+  --border2:   #263552;
+  --text:      #e2e8f0;
+  --text-muted:#64748b;
+  --text-dim:  #334155;
+  --accent:    #6366f1;
+  --accent2:   #818cf8;
+  --green:     #10b981;
+  --green-bg:  #022c22;
+  --green-bdr: #064e3b;
+  --red:       #ef4444;
+  --red-bg:    #1c0a0a;
+  --red-bdr:   #450a0a;
+  --yellow:    #f59e0b;
+  --radius:    10px;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 48px 16px 80px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---- Header ---- */
+.container { width: 100%; max-width: 800px; }
+
+header { text-align: center; margin-bottom: 40px; }
+
+.header-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(99,102,241,0.12);
+  border: 1px solid rgba(99,102,241,0.25);
+  border-radius: 999px;
+  padding: 4px 14px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--accent2);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+header h1 {
+  font-size: 2.1rem;
+  font-weight: 700;
+  letter-spacing: -0.7px;
+  color: #f8fafc;
+  line-height: 1.2;
+}
+
+.subtitle { margin-top: 10px; color: var(--text-muted); font-size: 0.95rem; }
+
+/* ---- Search ---- */
+.search-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 12px;
+}
+
+.search-form { display: flex; gap: 10px; }
+
+.url-input {
+  flex: 1;
+  padding: 13px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--border2);
+  background: var(--surface2);
+  color: var(--text);
+  font-size: 0.95rem;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.url-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(99,102,241,0.15);
+}
+.url-input::placeholder { color: var(--text-dim); }
+
+.submit-btn {
+  padding: 13px 26px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+}
+.submit-btn:hover:not(:disabled) { background: #4f46e5; }
+.submit-btn:active:not(:disabled) { transform: scale(0.98); }
+.submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* ---- Error ---- */
+.error-box {
+  margin-top: 12px;
+  padding: 11px 16px;
+  background: var(--red-bg);
+  border: 1px solid var(--red-bdr);
+  border-radius: 8px;
+  color: #fca5a5;
+  font-size: 0.88rem;
+}
+
+/* ---- History ---- */
+.history { margin-top: 28px; }
+
+.history-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  padding: 0 2px;
+}
+.history-header h2 { font-size: 0.78rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.07em; }
+
+.clear-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  padding: 5px 14px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+.clear-btn:hover { border-color: var(--border2); color: var(--text); }
+
+.result-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+
+/* ---- Result Item ---- */
+.result-item {
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+.item-phishing  { border-color: rgba(239,68,68,0.35); }
+.item-legitimate { border-color: rgba(16,185,129,0.3); }
+
+.result-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  gap: 14px;
+}
+
+.result-url {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+}
+
+.result-actions { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+
+.details-btn {
+  background: transparent;
+  border: 1px solid var(--border2);
+  color: var(--text-muted);
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+.details-btn:hover { border-color: var(--accent); color: var(--accent2); }
+
+/* ---- Badges ---- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 13px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+.badge-phishing  { background: rgba(239,68,68,0.15); color: #f87171; border: 1px solid rgba(239,68,68,0.3); }
+.badge-legitimate { background: rgba(16,185,129,0.12); color: #34d399; border: 1px solid rgba(16,185,129,0.25); }
+
+/* ---- Breakdown Container ---- */
+.breakdown {
+  border-top: 1px solid var(--border);
+  background: var(--bg);
+  padding: 24px 20px 18px;
+}
+
+.breakdown-section { margin-bottom: 28px; }
+
+/* ---- Section Header ---- */
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.section-header-left { display: flex; align-items: center; gap: 12px; }
+.section-icon { font-size: 1.1rem; line-height: 1; }
+.section-title { font-size: 0.88rem; font-weight: 600; color: #cbd5e1; }
+.section-hint  { font-size: 0.75rem; color: var(--text-muted); margin-top: 2px; }
+
+/* Structural summary pill */
+.struct-summary {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  padding: 5px 14px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+}
+.summary-warn { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.25); }
+.summary-ok   { background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.2); }
+.summary-num  { font-weight: 700; color: var(--text); font-size: 1rem; }
+.summary-warn .summary-num { color: #f87171; }
+.summary-ok   .summary-num { color: #34d399; }
+.summary-label { color: var(--text-muted); font-size: 0.78rem; }
+
+/* ---- Structural Table ---- */
+.feat-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.feat-table thead tr {
+  background: var(--surface2);
+}
+
+.feat-table th {
+  padding: 10px 16px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.feat-table td {
+  padding: 11px 16px;
+  font-size: 0.84rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  vertical-align: middle;
+}
+.feat-table tr:last-child td { border-bottom: none; }
+
+.feat-table tr.row-flagged td { background: #140808; }
+.feat-table tr:not(.row-flagged) td { background: #040d09; }
+
+.feat-name { color: #cbd5e1; font-weight: 500; }
+
+/* Status chips */
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 11px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.chip-safe   { background: rgba(16,185,129,0.1); color: #34d399; border: 1px solid rgba(16,185,129,0.2); }
+.chip-danger { background: rgba(239,68,68,0.12); color: #f87171; border: 1px solid rgba(239,68,68,0.3); }
+
+/* Importance cell */
+.imp-cell { display: flex; align-items: center; gap: 10px; }
+
+.imp-track {
+  flex: 1;
+  height: 5px;
+  background: var(--surface3);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.imp-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #6366f1, #818cf8);
+  transition: width 0.4s ease;
+}
+.imp-fill-danger { background: linear-gradient(90deg, #ef4444, #f87171); }
+
+.imp-pct { font-size: 0.75rem; color: var(--text-muted); min-width: 38px; text-align: right; font-variant-numeric: tabular-nums; }
+
+/* ---- Statistical Chart ---- */
+.stat-chart-wrap {
+  position: relative;
+  height: 430px;
+  background: var(--surface);
+  border-radius: 10px;
+  padding: 18px 16px 14px;
+  border: 1px solid var(--border);
+}
+
+/* ---- Footer / Risk Meter ---- */
+.breakdown-footer {
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  margin-top: 8px;
+}
+
+.risk-footer-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.risk-footer-left {}
+.risk-footer-title { font-size: 0.88rem; font-weight: 600; color: #cbd5e1; }
+.risk-footer-sub   { font-size: 0.75rem; color: var(--text-muted); margin-top: 3px; }
+
+/* Arc meter */
+.risk-meter {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+
+.risk-meter-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px 28px 14px;
+  min-width: 220px;
+}
+
+.risk-arc { width: 180px; height: 90px; overflow: visible; }
+
+.risk-scale {
+  display: flex;
+  justify-content: space-between;
+  width: 180px;
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  margin-top: -2px;
+  padding: 0 4px;
+}
+.scale-low  { color: #10b981; }
+.scale-mid  { color: #f59e0b; }
+.scale-high { color: #ef4444; }
+
+.risk-label-chip {
+  display: inline-flex;
+  padding: 4px 16px;
+  border-radius: 999px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  margin-top: 4px;
+}
+.risk-low    { background: rgba(16,185,129,0.1);  color: #34d399; border: 1px solid rgba(16,185,129,0.25); }
+.risk-medium { background: rgba(245,158,11,0.1);  color: #fbbf24; border: 1px solid rgba(245,158,11,0.3); }
+.risk-high   { background: rgba(239,68,68,0.12);  color: #f87171; border: 1px solid rgba(239,68,68,0.35); }
+
+.imp-note { font-size: 0.73rem; color: var(--text-dim); text-align: center; margin-top: 4px; }

@@ -1,0 +1,10 @@
+# Backend dependencies only — no training/notebook packages
+
+flask==3.1.0
+flask-cors==5.0.0
+joblib==1.4.2
+scikit-learn==1.6.1
+numpy>=1.24.0
+pandas>=2.0.0
+tldextract>=3.1.0
+requests>=2.28.0
